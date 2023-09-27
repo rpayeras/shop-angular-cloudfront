@@ -2,15 +2,15 @@ version: 0.2
 
 env:
   variables:
-    SOURCE_OUTPUT_BUCKET: ""
+    SOURCE_OUTPUT_BUCKET: "source-artifacts-rpayeras"
     SOURCE_PATH: "source"
-    APP_NAME: "shop"
+    APP_NAME: "shop-angular-rpayeras"
     TARGET_BRANCH: "develop"
 
 phases:
   install:
     runtime-versions:
-      nodejs: 14
+      nodejs: 16
 
   build:
     commands:

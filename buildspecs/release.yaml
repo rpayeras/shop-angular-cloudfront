@@ -7,9 +7,8 @@ env:
     BUILD_CONFIGURATION: "production"
 
     # AWS-specific variables:
-    S3_BUCKET: ""
-    CLOUDFRONT_DISTRIBUTION_ID: ""
-
+    S3_BUCKET: "/preprod/cicd/source-artifacts/bucket"
+    CLOUDFRONT_DISTRIBUTION_ID: "E2SPCPNYFQU6RE"
 phases:
   install:
     runtime-versions:
@@ -18,7 +17,7 @@ phases:
     commands:
       # Update system packages
       - echo Updating and Installing system dependencies...
-#      - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+      #      - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
       - apt-get update -y -q --list-cleanup || true
 
       # Install all necessary dependencies:
@@ -40,16 +39,16 @@ phases:
       - aws configure set preview.cloudfront true
 
       # Invalidate CloudFront cache
-#      - aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DISTRIBUTION_ID} --paths "/index.html"
+      #      - aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DISTRIBUTION_ID} --paths "/index.html"
 
       # Clear S3 bucket:
       - aws s3 rm s3://${S3_BUCKET} --recursive
-#      - aws s3 rm s3://${S3_BUCKET} --recursive --exclude "index.html"
+      #      - aws s3 rm s3://${S3_BUCKET} --recursive --exclude "index.html"
       - echo S3 bucket is cleared.
 
       # Show maintenance page while app is loaded
-#      - aws cp maintenance/index.html  s3://${S3_BUCKET}/index.html
-#      - aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DISTRIBUTION_ID} --paths "/index.html"
+      #      - aws cp maintenance/index.html  s3://${S3_BUCKET}/index.html
+      #      - aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DISTRIBUTION_ID} --paths "/index.html"
 
       # Copy dist folder to S3 bucket:
       - aws s3 cp dist/app s3://${S3_BUCKET} --recursive
@@ -61,6 +60,6 @@ phases:
 
 artifacts:
   files:
-    - '**/*'
-  base-directory: 'dist/app'
+    - "**/*"
+  base-directory: "dist/app"
   discard-paths: yes
