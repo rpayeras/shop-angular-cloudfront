@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    PROJECT_NAME: ""
+    PROJECT_NAME: "client-app-quality-check"
     BUILD_CONFIGURATION: "production"
 
 phases:
@@ -27,19 +27,19 @@ phases:
     commands:
       # Perform Code quality checks:
       - echo Checking code style...
-#      - npm run lint
+      #      - npm run lint
 
       - echo Running unit tests...
-#      - npm run test:ci
+      #      - npm run test:ci
 
       - echo Running unit tests over serverless app...
-#      - npm run sam:test
+      #      - npm run sam:test
 
       - echo Building a project...
       - npm run build --configuration=${BUILD_CONFIGURATION}
 
       - echo Running npm audit
-#      - npm audit
+  #      - npm audit
 
   post_build:
     commands:
