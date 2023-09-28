@@ -7,7 +7,7 @@ env:
     BUILD_CONFIGURATION: "production"
 
     # AWS-specific variables:
-    S3_BUCKET: "/preprod/cicd/source-artifacts/bucket"
+    S3_BUCKET: "source-artifacts-rpayeras"
     CLOUDFRONT_DISTRIBUTION_ID: "E2SPCPNYFQU6RE"
 phases:
   install:
